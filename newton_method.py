@@ -51,3 +51,4 @@ if __name__ == "__main__":
         maximum_interation=100,
         iteration=1,
     )
+    print(optimum_x_value1)
