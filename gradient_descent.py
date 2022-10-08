@@ -28,7 +28,7 @@ def gradient_descent(
 
     new_x = initial_x + alpha * p_vector
 
-    difference = abs(func(initial_x) - func(new_x))
+    difference = np.linalg.norm(func(initial_x) - func(new_x))
     if (difference < delta) or (iteration >= maximum_interation):
         return new_x
 
@@ -37,7 +37,7 @@ def gradient_descent(
             func,
             gradient_function,
             initial_x=new_x,
-            initial_alpha=alpha,
+            initial_alpha=initial_alpha,
             delta=delta,
             maximum_interation=maximum_interation,
             iteration=iteration,
@@ -48,17 +48,17 @@ if __name__ == "__main__":
     optimum_x_value1 = gradient_descent(
         func_1,
         actual_gradient_func1,
-        initial_x=np.array([50, 50]),
+        initial_x=np.array([50, 50]).reshape(-1,1),
         initial_alpha=0.01,
-        delta=0.001,
-        maximum_interation=100,
+        delta=0.00001,
+        maximum_interation=1000,
         iteration=1,
     )
 
     optimum_x_value2 = gradient_descent(
         func_2,
         actual_gradient_func2,
-        initial_x=np.array([2, 1]),
+        initial_x=np.array([2, 1]).reshape(-1,1),
         initial_alpha=0.01,
         delta=0.001,
         maximum_interation=100,

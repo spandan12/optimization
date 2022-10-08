@@ -16,9 +16,8 @@ def quasi_newton(
     iteration = iteration + 1
     
     grad = gradient_function(initial_x)
-
     p_vector = - F_value @ grad
-    print(initial_x)
+    
     alpha = backtracking(
         func,
         gradient_function,
@@ -30,7 +29,7 @@ def quasi_newton(
     )
     new_x = initial_x + (alpha * p_vector)
 
-    difference = abs(func(initial_x) - func(new_x))
+    difference = np.linalg.norm(initial_x - new_x)
     if (difference < delta) or (iteration >= maximum_interation):
         return new_x
 
@@ -56,7 +55,7 @@ def quasi_newton(
             gradient_function,
             F_value=new_F_value,
             initial_x=new_x,
-            initial_alpha=alpha,
+            initial_alpha=initial_alpha,
             delta=delta,
             maximum_interation=maximum_interation,
             iteration=iteration,
