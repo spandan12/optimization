@@ -1,0 +1,78 @@
+import numpy as np
+from functions import func_1, actual_gradient_func1
+from backtracking import backtracking
+
+
+def quasi_newton(
+    func,
+    gradient_function,
+    F_value,
+    initial_x,
+    initial_alpha,
+    delta,
+    maximum_interation,
+    iteration,
+):
+    iteration = iteration + 1
+    
+    grad = gradient_function(initial_x)
+
+    p_vector = - F_value @ grad
+    print(initial_x)
+    alpha = backtracking(
+        func,
+        gradient_function,
+        p_vector=p_vector,
+        x_vector=initial_x,
+        initial_alpha=initial_alpha,
+        rho=0.5,
+        c=0.1,
+    )
+    new_x = initial_x + (alpha * p_vector)
+
+    difference = abs(func(initial_x) - func(new_x))
+    if (difference < delta) or (iteration >= maximum_interation):
+        return new_x
+
+    else:
+        new_grad = gradient_function(new_x)
+        S_value = new_x - initial_x
+        Y_value = new_grad - grad
+        
+        denom1 = (Y_value.T @ S_value) ** 2
+        denom2 = Y_value.T @ S_value
+
+        F_value_change1 = ((Y_value.T @ ((F_value @ Y_value) + S_value)) / denom1) * (
+            S_value @ S_value.T
+        )
+        F_value_change2 = (
+            (S_value @ (Y_value.T @ F_value)) + (F_value @ Y_value @ S_value.T)
+        ) / denom2
+
+        new_F_value = F_value + F_value_change1 - F_value_change2
+
+        return quasi_newton(
+            func,
+            gradient_function,
+            F_value=new_F_value,
+            initial_x=new_x,
+            initial_alpha=alpha,
+            delta=delta,
+            maximum_interation=maximum_interation,
+            iteration=iteration,
+        )
+
+
+if __name__ == "__main__":
+    
+    optimum_x_value1 = quasi_newton(
+        func_1,
+        actual_gradient_func1,
+        F_value=np.array([[1, 0], [0, 1]]),
+        initial_x=np.array([50, 50]).reshape(2,1),
+        initial_alpha=1,
+        delta=1e-6,
+        maximum_interation=1000,
+        iteration=1,
+    )
+    print(optimum_x_value1)
