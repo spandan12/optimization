@@ -45,7 +45,7 @@ if __name__ == "__main__":
         func_1,
         hessian_func1,
         actual_gradient_func1,
-        initial_x=np.array([50, 50]),
+        initial_x=np.array([50, 50]).reshape(-1,1),
         initial_alpha=1,
         delta=0.001,
         maximum_interation=100,

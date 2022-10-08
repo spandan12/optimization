@@ -30,3 +30,15 @@ def actual_gradient_func2(x):
 
 def hessian_func1():
     return np.array([[2, 0], [0, 20]])
+
+def problem_function_1(x):
+    func_value = 0
+
+    for i in range(0, 100):
+        update_value = (i+1) * (x[i] ** 2)
+        func_value = func_value + update_value
+
+    return func_value
+
+
+
