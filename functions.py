@@ -41,4 +41,8 @@ def problem_function_1(x):
     return func_value
 
 
+def gradient_function_1(x):
 
+    grad_func_value = np.array([(2* (i+1) * x[i]) for i in range(0, 100)]).reshape(-1,1)
+
+    return grad_func_value
