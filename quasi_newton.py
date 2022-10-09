@@ -31,6 +31,7 @@ def quasi_newton(
 
     difference = np.linalg.norm(initial_x - new_x)
     if (difference < delta) or (iteration >= maximum_interation):
+        print(iteration)
         return new_x
 
     else:
