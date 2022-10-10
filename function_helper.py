@@ -8,7 +8,7 @@ def read_file(path):
 
 
 def read_coefficient_a():
-    c_vector = read_file("fun2_A.txt").reshape(500, 100)
+    c_vector = read_file("fun2_A.txt").reshape(100, 500).T
 
     return c_vector
 

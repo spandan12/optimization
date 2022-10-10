@@ -29,7 +29,7 @@ def actual_gradient_func2(x):
     ).reshape(-1, 1)
 
 
-def hessian_func1():
+def hessian_func1(x):
     return np.array([[2, 0], [0, 20]])
 
 
@@ -59,8 +59,9 @@ def get_a_b_c_coefficient():
 def problem_function_2(x):
 
     A, B, C = get_a_b_c_coefficient()
-    # breakpoint()
+    
     func_value = C.T @ x - np.sum(np.log(B - A @ x))
+    
 
     return func_value
 
@@ -69,7 +70,7 @@ def gradient_function_2(x):
 
     A, B, C = get_a_b_c_coefficient()
     grad_func_value = C + A.T @ (np.reciprocal(B - A @ x))
-
+    # breakpoint()
     return grad_func_value
 
 

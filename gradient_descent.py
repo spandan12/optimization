@@ -11,6 +11,7 @@ def gradient_descent(
     delta,
     maximum_interation,
     iteration,
+    constraint
 ):
     iteration = iteration + 1
 
@@ -24,6 +25,7 @@ def gradient_descent(
         initial_alpha=initial_alpha,
         rho=0.9,
         c=0.4,
+        constraint=constraint
     )
 
     new_x = initial_x + alpha * p_vector
@@ -41,6 +43,7 @@ def gradient_descent(
             delta=delta,
             maximum_interation=maximum_interation,
             iteration=iteration,
+            constraint=constraint
         )
 
 # test functions
@@ -53,6 +56,7 @@ if __name__ == "__main__":
         delta=0.00001,
         maximum_interation=1000,
         iteration=1,
+        constraint = False
     )
 
     optimum_x_value2 = gradient_descent(
@@ -63,5 +67,6 @@ if __name__ == "__main__":
         delta=0.001,
         maximum_interation=100,
         iteration=1,
+        constraint = False
     )
     print(optimum_x_value1, optimum_x_value2)
